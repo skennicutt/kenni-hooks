@@ -13,6 +13,15 @@ const bakingInstructions = [
 ];
 
 describe('useSimpleStepManager', () => {
+  it('errors when no steps are given', () => {
+    const hookProps = {
+      steps: [],
+    };
+
+    const { result } = renderHook(() => useSimpleStepManager<String>(hookProps));
+
+    expect(result.error).toEqual(Error('Must supply hook with array of at least one item'))
+  })
   it('returns the first step', () => {
   const hookProps = {
     steps: bakingInstructions,
